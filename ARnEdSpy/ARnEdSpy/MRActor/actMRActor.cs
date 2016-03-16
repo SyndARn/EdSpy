@@ -159,8 +159,6 @@ namespace ARnEdSpy.MRActor
         IConnectableObservable<actDataActor<EDDScheme.EDDCommodity>> source = null;
         IObserver<actDataActor<EDDScheme.EDDCommodity>> target = null;
 
-        // LocationTracker<actDataActor<EDDScheme.EDDCommodity>> source = new LocationTracker<actDataActor<EDDScheme.EDDCommodity>>();
-
         IDisposable subscription = null;
         IScheduler scheduler = new EventLoopScheduler();
 
@@ -212,7 +210,6 @@ namespace ARnEdSpy.MRActor
                 () => Console.WriteLine("Completed"));
 
             source.Connect();
-            // Become(new bhvBehavior<Tuple<MRQuery, string, IActor>>(FindData));
         }
 
 
@@ -250,10 +247,6 @@ namespace ARnEdSpy.MRActor
                 act = new actDataActor<EDDScheme.EDDCommodity>(a);
                 fCommo.Add(act);
                 SendMessage(act);
-                // source.Connect();
-                // source.Connect();
-                // source.TrackLocation(act);
-                // actObservable<actDataActor<EDDScheme.EDDCommodity>>.instance.Value.Track(act);
             }
             catch (Exception e)
             {
