@@ -47,11 +47,36 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr4.StringTemplate">
+      <HintPath>..\packages\Antlr4.StringTemplate.4.0.6.9004\lib\net35\Antlr4.StringTemplate.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>..\packages\DotNetZip.1.9.8\lib\net20\Ionic.Zip.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NJsonSchema">
+      <HintPath>..\packages\NJsonSchema.1.29.5875.38535\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10\NJsonSchema.dll</HintPath>
+    </Reference>
+    <Reference Include="NJsonSchema.CodeGeneration">
+      <HintPath>..\packages\NJsonSchema.CodeGeneration.1.29.5875.38536\lib\net45\NJsonSchema.CodeGeneration.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.3.0-beta2\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.3.0-beta2\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.3.0-beta2\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.3.0-beta2\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,6 +91,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="actStringCatcher.cs" />
+    <Compile Include="EDDScheme\EDDCommodities.cs" />
+    <Compile Include="EDDScheme\Shipyard.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +100,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="MqListener\actZeroMQListener.cs" />
+    <Compile Include="MRActor\actMRActor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -89,6 +117,8 @@
     </Compile>
     <None Include="amd64\libsodium.so" />
     <None Include="amd64\libzmq.so" />
+    <None Include="EDDScheme\Commodities.JSON" />
+    <None Include="EDDScheme\Outfit.JSON" />
     <None Include="i386\libsodium.so" />
     <None Include="i386\libzmq.so" />
     <None Include="packages.config" />
@@ -112,6 +142,7 @@
     <Content Include="amd64\libzmq.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="EDDScheme\Shipyard.JSON" />
     <Content Include="i386\libsodium.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

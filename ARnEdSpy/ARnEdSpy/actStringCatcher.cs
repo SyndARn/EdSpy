@@ -9,6 +9,8 @@ using System.Windows.Forms;
 namespace ARnEdSpy
 {
     // cactch a C# event and publish it to a winform control
+
+
     class actStringCatcher : actActionActor
     {
 
