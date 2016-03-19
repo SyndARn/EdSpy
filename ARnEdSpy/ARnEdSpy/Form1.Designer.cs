@@ -39,6 +39,7 @@
             this.lblEURUSD = new System.Windows.Forms.Label();
             this.lblEURAUD = new System.Windows.Forms.Label();
             this.lblEURGBP = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -82,7 +83,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(15, 190);
+            this.button2.Location = new System.Drawing.Point(39, 260);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
@@ -135,11 +136,22 @@
             this.lblEURGBP.TabIndex = 9;
             this.lblEURGBP.Text = "lblEURGBP";
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(39, 166);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 10;
+            this.button4.Text = "Actor Observable";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1316, 590);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.lblEURGBP);
             this.Controls.Add(this.lblEURAUD);
             this.Controls.Add(this.lblEURUSD);
@@ -169,6 +181,7 @@
         private System.Windows.Forms.Label lblEURUSD;
         private System.Windows.Forms.Label lblEURAUD;
         private System.Windows.Forms.Label lblEURGBP;
+        private System.Windows.Forms.Button button4;
     }
 }
 

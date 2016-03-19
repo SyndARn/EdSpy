@@ -224,5 +224,53 @@ namespace ARnEdSpy
             AttachToEvent(RSSEvent, e);
             sc.NextMessage();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var actobs = new actObservable<string>();
+            
+            var obs1 = Observable.Generate(0L, i => i < 100, i => i + 1, i => i, i => TimeSpan.FromMilliseconds(500))
+            .Publish();
+            obs1.Subscribe(
+            x =>
+            {
+                var action = new actAction<string>();
+                action.SendAction(() =>
+                {
+                    string s = x.ToString(CultureInfo.InvariantCulture);
+                    actobs.SendMessage(s);
+                });
+            }) ;
+            obs1.Connect();
+
+            var obs2 = Observable.Generate(0L, i => i > -100, i => i - 1, i => i, i => TimeSpan.FromMilliseconds(500))
+            .Publish();
+            obs2.Subscribe(
+            x =>
+            {
+                var action = new actAction<string>();
+                action.SendAction(() =>
+                {
+                    string s = x.ToString(CultureInfo.InvariantCulture);
+                    actobs.SendMessage("neg "+s);
+                });
+            });
+            obs2.Connect();
+
+
+            var result = obs1.Merge(obs2)
+                // .Scan((d1, d2) => Math.Abs(d1) < Math.Abs(d2) ? d2 : d1)
+                .Subscribe
+                (
+                x =>
+                {
+                    this.Invoke((MethodInvoker) delegate
+                    {
+                            textBox1.AppendText(x + Environment.NewLine);
+                    });
+                }
+                );
+            // result.Connect();
+        }
     }
 }
