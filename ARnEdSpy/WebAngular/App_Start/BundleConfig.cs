@@ -12,8 +12,8 @@ namespace WebAngular
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/WebAngular")
-    .IncludeDirectory("~/Scripts/Controllers", "*.js")
-    .Include("~/Scripts/WebAngular.js"));
+                .IncludeDirectory("~/Scripts/Controllers", "*.js")
+                .Include("~/Scripts/WebAngular.js"));
 
             BundleTable.EnableOptimizations = true;
 
