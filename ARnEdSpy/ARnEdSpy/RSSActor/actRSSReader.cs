@@ -13,13 +13,13 @@ using System.Net.Http;
 
 namespace ARnEdSpy.RSSActor
 {
-    public class actRSSReader : actActor
+    public class actRSSReader : BaseActor
     {
         string fUrl;
         public actRSSReader(string anUrl, IActor target)
         {
             fUrl = anUrl;
-            Become(new bhvBehavior<Tuple<string,IActor>>(DoSyndication)) ;
+            Become(new Behavior<Tuple<string,IActor>>(DoSyndication)) ;
             SendMessage(Tuple.Create(anUrl,target)) ;
         }
 
@@ -35,12 +35,12 @@ namespace ARnEdSpy.RSSActor
         }
     }
 
-    public class actYahooQuote : actActor 
+    public class actYahooQuote : BaseActor
     { 
         const string model = @"http://download.finance.yahoo.com/d/quotes.csv?e=.csv&f=c4l1&s={0}=X" ;
         public actYahooQuote(string currencyPair, IActor target)
         {
-            Become(new bhvBehavior<Tuple<string, IActor>>(DoQuote));
+            Become(new Behavior<Tuple<string, IActor>>(DoQuote));
             SendMessage(Tuple.Create(string.Format(model,currencyPair), target));
         }
 

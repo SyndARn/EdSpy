@@ -1,6 +1,36 @@
-﻿<meta http-equiv="refresh" content="10"></meta>
-<b>Test @ViewBag.Currency</b>
+﻿<html>
+<head>
+    <meta http-equiv="refresh" content="10"></meta>
+</head>
+<body>
+    <b>Test @ViewBag.Currency</b>
 
-<a>@ViewBag.Quote</a>
+    <a>@ViewBag.Quote</a>
 
 
+    <div ng-controller="GetQuoteAngularCtrl">
+
+        <p>@ViewBag.Currency</p>
+        <h1>{{getquote}}</h1>
+        <button ng-click="loaddata()">Refresh</button>
+
+    </div>
+
+    <script>
+
+
+
+        function GetQuoteAngularCtrl($scope, $http) {
+            $scope.loaddata = 
+                $http.get("WebAngular/GetQuote?quote="+@ViewBag.Currency)
+            .success(function(response) {
+                $scope.getquote = response.data;
+            });
+            $scope.loaddata();
+        }
+
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+
+</body>
+</html>

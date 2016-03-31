@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace ARnEdSpy.MRActor
 {
-    public class actObservable<T> : actActor, IObservable<T>
+    public class actObservable<T> : BaseActor, IObservable<T>
     {
         private List<IObserver<T>> observers;
         public actObservable()
         {
             observers = new List<IObserver<T>>();
-            var bhv1 = new bhvBehavior<IObserver<T>>(DoSubscribe);
-            var bhv2 = new bhvBehavior<T>(DoTrack);
+            var bhv1 = new Behavior<IObserver<T>>(DoSubscribe);
+            var bhv2 = new Behavior<T>(DoTrack);
             // var bhv3 = new bhvBehavior<T>(DoEndTransmission);
 
             Become(bhv1);

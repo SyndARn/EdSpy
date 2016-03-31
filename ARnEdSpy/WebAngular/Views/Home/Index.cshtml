@@ -1,44 +1,31 @@
-﻿<!DOCTYPE html>
+﻿<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+<body >
 
-<html ng-app="WebAngular" ng-controller="LandingPageController">
-
-<head>
-    <title ng-bind="models.WebAngular"></title>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
-    @Styles.Render("~/Content/css")
-</head>
-<body>
+    <p><a href="/WebAngular/USD?quote=USD">View EUR/USD</a></p>
+    <p><a href="/WebAngular/USD?quote=GBP">View EUR/GBP</a></p>
+    <p><a href="/WebAngular/USD?quote=AUD">View EUR/AUD</a></p>
+    <p><a href="/WebAngular/GetQuote?quote=AUD">Quote EUR/AUD</a></p>
 
 
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" ng-click="navbarProperties.isCollapsed = !navbarProperties.isCollapsed">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Web Angular Quote Test</a>
-            </div>
-            <div class="navbar-collapse collapse" collapse="navbarProperties.isCollapsed">
-                <ul class="nav navbar-nav">
-                        <li><a href="/#/WebAngularUsd/USD">View EUR/USD</a></li>
-                        <li><a href="/#/WebAngularUsd/GBP">View EUR/GBP</a></li>
-                        <li><a href="/#/WebAngularUsd/AUD">View EUR/AUD</a></li>
-                </ul>
-            </div>
-        </div>
+    <div ng-app = "myApp" ng-controller="GetQuoteAngularCtrl">
+        <h1>{{getquoteUSD}}</h1>
+        <button ng-click="loadData()">Refresh</button>
     </div>
 
-    <div class="container mainContent">
-        <div ng-view></div>
-    </div>
-    
-  
-    <div ng-view></div>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
-    @Scripts.Render("~/bundles/WebAngular")
+
+    <script>
+        var myApp = angular.module('myApp', []);
+        app.controller('GetQuoteAngularCtrl', appController);
+        var appController = function GetQuoteAngularCtrl($scope, $http) {
+            $scope.loadData =
+                function () {
+                    $http.get("WebAngular/GetQuote?quote=USD")
+                        .success(function (response) {
+                            $scope.getquoteUSD = response.data;
+                    });
+            };
+            $scope.loadData();
+            };
+    </script>
+        
 </body>
-</html>

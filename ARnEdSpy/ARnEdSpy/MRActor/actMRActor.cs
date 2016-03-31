@@ -76,7 +76,7 @@ namespace ARnEdSpy.MRActor
     }
 
 
-    public class actMRActor : actActor
+    public class actMRActor : BaseActor
     {
         List<actDataActor<EDDScheme.EDDShipYard>> fShipYardList;
         List<actDataActor<EDDScheme.EDDCommodity>> fCommo;
@@ -95,7 +95,7 @@ namespace ARnEdSpy.MRActor
 
             CancellationToken ct = new CancellationToken();
 
-            Become(new bhvBehavior<Tuple<MRQuery, string>>(AddData));
+            Become(new Behavior<Tuple<MRQuery, string>>(AddData));
 
             source = Observable.Create<actDataActor<EDDScheme.EDDCommodity>>(observer =>
                 {
@@ -181,13 +181,13 @@ namespace ARnEdSpy.MRActor
 
     }
 
-    public class actDataActor<T> : actActor
+    public class actDataActor<T> : BaseActor
     {
         T fData;
         public actDataActor(T msg)
         {
             fData = msg;
-            Become(new bhvBehavior<Tuple<string,IActor>>(DoFindData));
+            Become(new Behavior<Tuple<string,IActor>>(DoFindData));
         }
 
         private void DoFindData(Tuple<string,IActor> msg)

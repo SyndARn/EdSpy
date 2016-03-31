@@ -1,18 +1,26 @@
-﻿var WebAngular = angular.module('WebAngular', ['ngRoute', 'ui.bootstrap']);
+﻿var WebAngular = angular.module('WebAngular', []);
+webAngular.Controller('GetQuoteAngularCtrl', GetQuoteAngularCtrl);
+webAngular.Controller('RefreshQuoteCtrl', RefreshQuoteCtrl);
 
-WebAngular.controller('LandingPageController', LandingPageController);
+var GetQuoteAngularCtrl = 
+   function ($scope, $http) {
+       $http.get('~/WebAngular/GetQuote?quote=USD')
+       .then(function (response) {
+           $scope.getquoteUSD = response.data;
+       }
+       );
+   };
+GetQuoteAngularCtrl.$inject = ['$scope,$http'];
 
-var configFunction = function ($routeProvider) {
-    $routeProvider.
-        when('/WebAngularUsd/:quote', {
-            templateUrl: function (params)
-            {
-                return '/WebAngular/Usd?quote=' + params.quote;;
-            }
-            , resolve: {}
-        }
-            );
-}
-configFunction.$inject = ['$routeProvider'];
+var RefreshQuoteCtrl = 
+  function loadData($scope, $http) {
+      $http.get('~/WebAngular/GetQuote?quote=USD')
+      .then(function mySucces(response) {
+          $scope.getquoteUSD = response.data;
+      }
+      );
+  } ;
 
-WebAngular.config(configFunction);
+RefreshQuoteCtrl.$inject = ['$scope,$http'];
+
+

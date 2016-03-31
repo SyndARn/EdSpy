@@ -38,16 +38,44 @@ namespace WebAngular.Controllers
             }
             return View();
         }
+
+        // GET: WebAngular
+        public ContentResult GetQuote(string quote)
+        {
+            var cr = new ContentResult();
+            if (!string.IsNullOrEmpty(quote))
+            {
+                ViewBag.Currency = quote;
+                if (server == null)
+                {
+                    Actor.Server.ActorServer.Start("localhost", 8181, false);
+                    server = Actor.Server.ActorServer.GetInstance();
+                }
+                if (dico == null)
+                    dico = new Dictionary<string, actCatcher>();
+                actCatcher cat = null;
+                if (!dico.TryGetValue(quote, out cat))
+                {
+                    cat = new actCatcher();
+                    dico[quote] = cat;
+                }
+                var yahoo = new actYahooQuote("EUR" + quote, cat);
+
+                ViewBag.Quote = cat.GetValue();
+                cr.Content = cat.GetValue();
+            }
+            return cr;
+        }
     }
 
-    public class actCatcher : actActor
+    public class actCatcher : BaseActor
     {
         string fQuote;
         object flock = new object();
 
         public actCatcher()
         {
-            Become(new bhvBehavior<string>(ReceiveString));
+            Become(new Behavior<string>(ReceiveString));
         }
 
         public string GetValue()
@@ -63,12 +91,12 @@ namespace WebAngular.Controllers
         }
     }
 
-    public class actYahooQuote : actActor
+    public class actYahooQuote : BaseActor
     {
         const string model = @"http://download.finance.yahoo.com/d/quotes.csv?e=.csv&f=c4l1&s={0}=X";
         public actYahooQuote(string currencyPair, IActor target)
         {
-            Become(new bhvBehavior<Tuple<string, IActor>>(DoQuote));
+            Become(new Behavior<Tuple<string, IActor>>(DoQuote));
             SendMessage(Tuple.Create(string.Format(model, currencyPair), target));
         }
 

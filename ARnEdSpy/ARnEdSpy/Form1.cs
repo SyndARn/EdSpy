@@ -234,7 +234,7 @@ namespace ARnEdSpy
             obs1.Subscribe(
             x =>
             {
-                var action = new actAction<string>();
+                var action = new ActionActor<string>();
                 action.SendAction(() =>
                 {
                     string s = x.ToString(CultureInfo.InvariantCulture);
@@ -248,7 +248,7 @@ namespace ARnEdSpy
             obs2.Subscribe(
             x =>
             {
-                var action = new actAction<string>();
+                var action = new ActionActor<string>();
                 action.SendAction(() =>
                 {
                     string s = x.ToString(CultureInfo.InvariantCulture);

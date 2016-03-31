@@ -13,17 +13,17 @@ using Ionic.Zlib;
 
 namespace ARnEdSpy.MqListener
 {
-    public class actZeroMQListener : actActor
+    public class actZeroMQListener : BaseActor
     {
         ZSocket listener;
         ZContext ztx;
-        actActor fAnswerActor;
+        BaseActor fAnswerActor;
 
-        public actZeroMQListener(actActor answerActor, string anUrl = @"tcp://eddn-relay.elite-markets.net:9500")
+        public actZeroMQListener(BaseActor answerActor, string anUrl = @"tcp://eddn-relay.elite-markets.net:9500")
             : base()
         {
             fAnswerActor = answerActor;
-            Become(new bhvBehavior<string>(DoRedirect));
+            Become(new Behavior<string>(DoRedirect));
             SendMessage(anUrl);
         }
 
@@ -38,16 +38,16 @@ namespace ARnEdSpy.MqListener
         }
     }
 
-    public class actZeroMqReceiver : actActor
+    public class actZeroMqReceiver : BaseActor
     {
 
-        public actZeroMqReceiver(ZSocket subscriber, actActor answer)
+        public actZeroMqReceiver(ZSocket subscriber, BaseActor answer)
         {
-            Become(new bhvBehavior<Tuple<ZSocket, actActor>>(DoRedirect));
+            Become(new Behavior<Tuple<ZSocket, BaseActor>>(DoRedirect));
             SendMessage(Tuple.Create(subscriber, answer));
         }
 
-        private void DoRedirect(Tuple<ZSocket, actActor> msg)
+        private void DoRedirect(Tuple<ZSocket, BaseActor> msg)
         {
             var frame = msg.Item1.ReceiveFrame();
             if (frame != null)
