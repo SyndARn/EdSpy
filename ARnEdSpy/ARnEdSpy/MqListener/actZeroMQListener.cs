@@ -8,7 +8,6 @@ using Actor.Base;
 using ZeroMQ;
 using System.IO.Compression;
 using System.IO;
-using Actor.Server;
 using Ionic.Zlib;
 
 namespace ARnEdSpy.MqListener

@@ -1,5 +1,4 @@
 ﻿using Actor.Base;
-using Actor.Server;
 using ARnEdSpy.MqListener;
 using ARnEdSpy.MRActor;
 using System;
@@ -21,6 +20,7 @@ using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using ARnEdSpy.RSSActor;
 using System.Globalization;
+using Actor.Server;
 
 namespace ARnEdSpy
 {
